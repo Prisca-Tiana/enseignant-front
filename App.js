@@ -169,7 +169,7 @@ class AddEnseignantActivity extends Component {
   render() {
     return (
       <View style={styles.MainContainer}>
-        <Text style={{fontSize: 20, textAlign: 'center', marginBottom: 7}}> Student Registration Form </Text>
+        <Text style={{fontSize: 20, textAlign: 'center', marginBottom: 7}}> Ajout d'enseignant </Text>
         <TexInput 
           placeholder='Matricule Enseignant' 
           onChangeText={ TextInputValue => this.setState({ TextInput_Enseignant_Matricule: TextInputValue})}
