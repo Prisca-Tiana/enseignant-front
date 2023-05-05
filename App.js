@@ -66,6 +66,15 @@ class MainActivity extends Component {
     setRefreshing(false);
   }
 
+  getEnseignant = async (idEnseignant, nomEnseignant, tauxHoraire, nb_heure) => {
+    this.props.navigation.navigate('Enseignant'), {
+      ID : idEnseignant,
+      NOM : nomEnseignant,
+      TAUX_HORAIRE : tauxHoraire,
+      NB_HEURE : nb_heure
+    }
+  }
+
   ItemSepartor = FlatList;
   ItemSepartor = () => {
     return (
@@ -95,10 +104,12 @@ class MainActivity extends Component {
               data = {dataSource}
               ItemSeparatorComponent={this.ItemSepartor}
               renderItem={({item}) => 
-                <Text style={styles.FlatListItemStyle} onPress={this.getEnseignant.bind(this, item.enseignant.id)}>{item.nom_enseignant}</Text>
+                <Text style={styles.FlatListItemStyle} onPress={this.getEnseignant.bind(this, item.idEnseignant, item.nomEnseignant, item.tauxHoraire, item.nb_heure)}>{item.nom_enseignant}</Text>
             }
               keyExtractor={(item, index) => index }
               />
+
+
             <Text style={{ hidden: true }}>{item.id}</Text>
             <Text>{item.matricule}</Text>
             <Text>{item.nom_enseignant}</Text>
