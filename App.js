@@ -31,8 +31,11 @@ class MainActivity extends Component {
   addEnseignant = async() => {
     this.props.navigation.navigate('Ajout Enseignant');
   }
+  
+  editEnseignant = async() => {
+    this.props.navigation.navigate('Modification Enseignant');
 
-
+  }
 
 }
 
