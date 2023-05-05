@@ -32,7 +32,7 @@ class MainActivity extends Component {
     this.props.navigation.navigate('Ajout Enseignant');
   }
   
-  editEnseignant = async() => {
+  editEnseignant = async(id) => {
     this.props.navigation.navigate('Modification Enseignant');
 
   }
@@ -45,7 +45,7 @@ class MainActivity extends Component {
       console.error(error);
     }
   }
-  
+
   loadPrestationTotal = async () => {
     try {
       const response = await fetch(API_URL/total);
@@ -60,6 +60,32 @@ class MainActivity extends Component {
     setRefreshing(true);
     await loadEnseignant();
     setRefreshing(false);
+  }
+
+  render () {
+    return (
+      <View>
+        <View>
+            <TouchableOpacity onPress={() => this.addEnseignant()}>
+                <Text>Ajouter</Text>
+            </TouchableOpacity>
+        </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Text style={{ hidden: true }}>{item.id}</Text>
+            <Text>{item.matricule}</Text>
+            <Text>{item.nom_enseignant}</Text>
+            <Text>{item.taux_horaire}</Text>
+            <Text>{item.nb_heure}</Text>
+            <TouchableOpacity onPress={() => this.editEnseignant(item.id)}>
+                      <Text>Modifier</Text>
+             </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.removeEnseignant(item.id)}>
+                      <Text>Supprimer</Text>
+            </TouchableOpacity>
+        </View>
+      </View>
+      
+    )
   }
 
 }
