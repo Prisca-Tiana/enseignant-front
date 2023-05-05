@@ -14,8 +14,12 @@ class MainActivity extends Component {
   constructor(props){
     super(props)
     this.state = {
-      // ato no asiana ny élément
+      isLoading: true
     }
+  }
+
+  componentDidMount(){
+    this.loadEnseignant
   }
 
   loadEnseignant = async () => {
@@ -49,8 +53,8 @@ class MainActivity extends Component {
   loadPrestationTotal = async () => {
     try {
       const response = await fetch(API_URL/total);
-      const data = await response.json();
-      setPrestation(data);
+      const dataSource = await response.json();
+      setPrestation(dataSource);
     } catch (error) {
       console.error(error);
     }
@@ -62,7 +66,23 @@ class MainActivity extends Component {
     setRefreshing(false);
   }
 
+  ItemSepartor = FlatList;
+  ItemSepartor = () => {
+    return (
+      <View style={{height: .2, width: '100%', backgroundColor:'#000'}}/>
+    )
+  }
+
+  
+
   render () {
+    if (this.state.isLoading){
+      return (
+        <View style={{flex: 1, paddingTop: 20}}>
+          <ActivityIndicator/>
+        </View>
+      )
+    }
     return (
       <View>
         <View>
@@ -71,16 +91,24 @@ class MainActivity extends Component {
             </TouchableOpacity>
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <FlatList 
+              data = {dataSource}
+              ItemSeparatorComponent={this.ItemSepartor}
+              renderItem={({item}) => 
+                <Text style={styles.FlatListItemStyle} onPress={this.getEnseignant.bind(this, item.enseignant.id)}>{item.nom_enseignant}</Text>
+            }
+              keyExtractor={(item, index) => index }
+              />
             <Text style={{ hidden: true }}>{item.id}</Text>
             <Text>{item.matricule}</Text>
             <Text>{item.nom_enseignant}</Text>
             <Text>{item.taux_horaire}</Text>
             <Text>{item.nb_heure}</Text>
             <TouchableOpacity onPress={() => this.editEnseignant(item.id)}>
-                      <Text>Modifier</Text>
+                <Text>Modifier</Text>
              </TouchableOpacity>
             <TouchableOpacity onPress={() => this.removeEnseignant(item.id)}>
-                      <Text>Supprimer</Text>
+                <Text>Supprimer</Text>
             </TouchableOpacity>
         </View>
       </View>
@@ -88,6 +116,24 @@ class MainActivity extends Component {
     )
   }
 
+}
+
+class AddEnseignantActivity extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+
+    }
+  }
+}
+
+class EditEnseignantActvity extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+
+    }
+  }
 }
 
 const persons = [
