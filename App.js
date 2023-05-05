@@ -37,6 +37,15 @@ class MainActivity extends Component {
 
   }
 
+  removeEnseignant = async id => {
+    try {
+      await fetch(`\${API_URL}/\${id}`, { method: 'DELETE' });
+      setEnseignant(enseignants => enseignants.filter(p => p.id !== id));
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
   loadPrestationTotal = async () => {
     try {
       const response = await fetch(API_URL/total);
@@ -52,7 +61,7 @@ class MainActivity extends Component {
     await loadEnseignant();
     setRefreshing(false);
   }
-  
+
 }
 
 const persons = [
