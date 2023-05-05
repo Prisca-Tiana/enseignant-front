@@ -133,7 +133,36 @@ class AddEnseignantActivity extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      TextInput_Enseignant_Matricule: '',
+      TextInput_Enseignant_Nom: '',
+      TextInput_Enseignant_Taux_Horaire: '',
+      TextInput_Enseignant_nb_Heure: '',
+    }
+  }
+  
+  addEnseignantToServer = async() => {
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          matricule: this.state.TextInput_Enseignant_Matricule, 
+          nom_enseignant: this.state.TextInput_Enseignant_Nom,  
+          taux_horaire: this.state.TextInput_Enseignant_Taux_Horaire,  
+          nb_heure: this.state.TextInput_Enseignant_nb_Heure 
+        })
+      }).then((response) =>response.json())
+      .then((responseJson) => {
+        Alert.alert(responseJson);
+      })
+      const data = await response.json();
+      setEnseignant(enseignants => [...enseignants, data]);
+      setMatricule('');
+      setNomEnseignant('');
+      setTauxHoraire('');
+      setNbHeure('');
+    } catch (error) {
+      console.error(error);
     }
   }
 }
@@ -142,7 +171,10 @@ class EditEnseignantActvity extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      TextInput_Enseignant_Matricule: '',
+      TextInput_Enseignant_Nom: '',
+      TextInput_Enseignant_Taux_Horaire: '',
+      TextInput_Enseignant_nb_Heure: '',
     }
   }
 }
