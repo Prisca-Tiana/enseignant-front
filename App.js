@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View, StyleSheet, TextInput, Button, 
   Plateform, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 import { Component } from 'react';
@@ -27,6 +27,11 @@ class MainActivity extends Component {
       console.error(error);
     }
   }
+  
+  addEnseignant = async() => {
+    this.props.navigation.navigate('Ajout Enseignant');
+  }
+
 
 
 }
