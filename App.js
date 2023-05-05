@@ -37,6 +37,16 @@ class MainActivity extends Component {
 
   }
 
+  loadPrestationTotal = async () => {
+    try {
+      const response = await fetch(API_URL/total);
+      const data = await response.json();
+      setPrestation(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 }
 
 const persons = [
