@@ -47,6 +47,12 @@ class MainActivity extends Component {
     }
   }
 
+  onRefresh = async () => {
+    setRefreshing(true);
+    await loadEnseignant();
+    setRefreshing(false);
+  }
+  
 }
 
 const persons = [
