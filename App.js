@@ -165,6 +165,42 @@ class AddEnseignantActivity extends Component {
       console.error(error);
     }
   }
+
+  render() {
+    return (
+      <View style={styles.MainContainer}>
+        <Text style={{fontSize: 20, textAlign: 'center', marginBottom: 7}}> Student Registration Form </Text>
+        <TexInput 
+          placeholder='Matricule Enseignant' 
+          onChangeText={ TextInputValue => this.setState({ TextInput_Enseignant_Matricule: TextInputValue})}
+          underlineColorAndroid='transparent'
+          style = {styles.TextInputSylteClass}
+        />
+        <TexInput 
+          placeholder='Nom Enseignant' 
+          onChangeText={ TextInputValue => this.setState({ TextInput_Enseignant_Nom: TextInputValue})}
+          underlineColorAndroid='transparent'
+          style = {styles.TextInputSylteClass}
+        />
+        <TexInput 
+          placeholder='Taux horaire Enseignant' 
+          onChangeText={ TextInputValue => this.setState({ TextInput_Enseignant_Taux_Horaire: TextInputValue})}
+          underlineColorAndroid='transparent'
+          style = {styles.TextInputSylteClass}
+        />
+        <TexInput 
+          placeholder="Nombre d'heure Enseignant"
+          onChangeText={ TextInputValue => this.setState({ TextInput_Enseignant_nb_Heure: TextInputValue})}
+          underlineColorAndroid='transparent'
+          style = {styles.TextInputSylteClass}
+        />
+        <TouchableOpacity activeOpacity={ .8 }
+          onPress={this.addEnseignantToServer}>
+            <Text>Ajouter</Text>
+          </TouchableOpacity>
+      </View>
+    )
+  }
 }
 
 class EditEnseignantActvity extends Component {
